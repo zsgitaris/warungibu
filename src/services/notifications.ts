@@ -1,4 +1,5 @@
 // src/services/notifications.ts
+
 export async function notifyByTelegram(order: {
   id: string;
   order_number?: string;
@@ -12,7 +13,6 @@ export async function notifyByTelegram(order: {
     return;
   }
 
-  // Format total dengan rupiah, jika ada
   const totalFormatted = order.total_amount != null
     ? new Intl.NumberFormat('id-ID', {
         style: 'currency',
@@ -21,11 +21,13 @@ export async function notifyByTelegram(order: {
       }).format(order.total_amount)
     : '';
 
-  const text = `🌟 Pesanan Baru!\n` +
-    `• ID: ${order.id}\n` +
-    (order.order_number ? `• No. Pesanan: ${order.order_number}\n` : '') +
-    (order.customer_name ? `• Pelanggan: ${order.customer_name}\n` : '') +
-    (totalFormatted ? `• Total: ${totalFormatted}` : '');
+  const textLines = [
+    '🌟 *Pesanan Baru!*',
+    `• *ID:* ${order.id}`,
+    order.order_number ? `• *No. Pesanan:* ${order.order_number}` : null,
+    order.customer_name ? `• *Pelanggan:* ${order.customer_name}` : null,
+    totalFormatted ? `• *Total:* ${totalFormatted}` : null,
+  ].filter(Boolean).join('\n');
 
   try {
     const res = await fetch(
@@ -35,8 +37,8 @@ export async function notifyByTelegram(order: {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           chat_id: chatId,
-          text,
-          parse_mode: 'HTML'
+          text: textLines,
+          parse_mode: 'Markdown'
         })
       }
     );
