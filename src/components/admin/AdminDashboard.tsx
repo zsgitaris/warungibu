@@ -349,6 +349,72 @@ const AdminDashboard = ({ user, onBack }: AdminDashboardProps) => {
                   </div>
 
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-                    <Card className="glass border-0 shadow-strong backdrop-blur-xl bg-white/80 hover:bg-white/90 I'll create a comprehensive PR to fix all UI/UX overlapping issues and improve the overall design consistency:
+                    <Card className="glass border-0 shadow-strong backdrop-blur-xl bg-white/80 hover:bg-white/90 transition-all duration-300 card-hover">
+                      <CardHeader>
+                        <CardTitle className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+                          <Package className="w-5 h-5 text-blue-600" />
+                          Menu Items
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="text-3xl font-bold text-gray-900 mb-2">{stats?.totalMenuItems || 0}</div>
+                        <p className="text-sm text-gray-600">Total menu items available</p>
+                      </CardContent>
+                    </Card>
 
-<boltArtifact id="fix-ui-ux-overlapping" title="Fix UI/UX Overlapping Issues and Improve Design Consistency">
+                    <Card className="glass border-0 shadow-strong backdrop-blur-xl bg-white/80 hover:bg-white/90 transition-all duration-300 card-hover">
+                      <CardHeader>
+                        <CardTitle className="text-lg font-semibold text-gray-900 flex items-center gap-2">
+                          <Users className="w-5 h-5 text-green-600" />
+                          User Breakdown
+                        </CardTitle>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-3">
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm text-gray-600">Admin Users</span>
+                            <span className="font-semibold text-gray-900">{stats?.adminUsers || 0}</span>
+                          </div>
+                          <div className="flex justify-between items-center">
+                            <span className="text-sm text-gray-600">Customer Users</span>
+                            <span className="font-semibold text-gray-900">{stats?.customerUsers || 0}</span>
+                          </div>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </div>
+                </div>
+              </ScrollArea>
+            </TabsContent>
+
+            <TabsContent value="orders">
+              <AdminOrderManagement />
+            </TabsContent>
+
+            <TabsContent value="menu">
+              <AdminMenuManagement />
+            </TabsContent>
+
+            <TabsContent value="categories">
+              <AdminCategoryManagement />
+            </TabsContent>
+
+            <TabsContent value="banners">
+              <AdminBannerManagement />
+            </TabsContent>
+
+            <TabsContent value="users">
+              <AdminUserManagement />
+            </TabsContent>
+
+            <TabsContent value="analytics">
+              <AdminAnalytics />
+            </TabsContent>
+          </div>
+        </Tabs>
+      </div>
+    </div>
+  );
+};
+
+export default AdminDashboard;
