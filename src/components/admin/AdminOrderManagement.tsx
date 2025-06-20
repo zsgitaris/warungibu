@@ -281,14 +281,13 @@ const AdminOrderManagement = ({ user }: AdminOrderManagementProps) => {
           placeholder="Cari nomor pesanan, nama customer, telepon, alamat, atau menu..."
         />
         
-        <div className="flex flex-nowrap overflow-x-auto whitespace-nowrap px-4 space-x-2 scrollbar-thin scrollbar-thumb-gray-300">
+        <div className="flex gap-2 flex-wrap">
           {['all', 'pending', 'confirmed', 'ready', 'delivered', 'cancelled'].map((status) => (
             <Button
               key={status}
               variant={selectedStatus === status ? 'default' : 'outline'}
               size="sm"
               onClick={() => handleStatusChange(status)}
-              className="min-w-max"
             >
               {status === 'all' ? 'Semua' : getStatusLabel(status)}
             </Button>
@@ -365,7 +364,7 @@ const AdminOrderManagement = ({ user }: AdminOrderManagementProps) => {
                   </div>
                 )}
 
-                <div className="flex flex-nowrap overflow-x-auto whitespace-nowrap pt-3 border-t space-x-2 scrollbar-thin scrollbar-thumb-gray-300">
+                <div className="flex gap-2 pt-3 border-t">
                   {order.status === 'pending' && (
                     <>
                       <Button

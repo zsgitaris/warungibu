@@ -33,7 +33,7 @@ const AdminCategoryManagement = () => {
   const { toast } = useToast();
   const isMobile = useIsMobile();
   const queryClient = useQueryClient();
-  const imageUploadRef = useRef<{ uploadImage: () => Promise<string | null>; reset: () => void }>(null);
+  const imageUploadRef = useRef<{ uploadImage: () => Promise<string | null> }>(null);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -45,13 +45,6 @@ const AdminCategoryManagement = () => {
   useEffect(() => {
     fetchCategories();
   }, []);
-
-  useEffect(() => {
-    // Reset the image upload component when dialog closes
-    if (!isDialogOpen && imageUploadRef.current) {
-      imageUploadRef.current.reset();
-    }
-  }, [isDialogOpen]);
 
   const fetchCategories = async () => {
     try {
@@ -87,14 +80,6 @@ const AdminCategoryManagement = () => {
         if (uploadedUrl) {
           finalImageUrl = uploadedUrl;
           console.log('Using uploaded image URL:', finalImageUrl);
-        } else if (!formData.image_url) {
-          // If upload failed and we don't have an existing image, show error
-          toast({
-            title: "Error",
-            description: "Gagal mengupload gambar. Silakan coba lagi.",
-            variant: "destructive",
-          });
-          return;
         }
       }
 
@@ -284,9 +269,6 @@ const AdminCategoryManagement = () => {
       is_active: true,
     });
     setEditingCategory(null);
-    if (imageUploadRef.current) {
-      imageUploadRef.current.reset();
-    }
   };
 
   const handleImageUpload = (imageUrl: string) => {
@@ -302,10 +284,7 @@ const AdminCategoryManagement = () => {
     <div className="space-y-4 md:space-y-6 p-4 md:p-0">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <h2 className="text-2xl md:text-3xl font-bold tracking-tight">Category Management</h2>
-        <Dialog open={isDialogOpen} onOpenChange={(open) => {
-          setIsDialogOpen(open);
-          if (!open) resetForm();
-        }}>
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <DialogTrigger asChild>
             <Button onClick={resetForm} className="w-full sm:w-auto">
               <Plus className="mr-2 h-4 w-4" />
@@ -449,7 +428,7 @@ const AdminCategoryManagement = () => {
                     <p className="text-gray-600 mb-2">{category.description}</p>
                   </div>
 
-                  <div className="flex flex-nowrap overflow-x-auto whitespace-nowrap space-x-2 scrollbar-thin scrollbar-thumb-gray-300">
+                  <div className="flex items-center space-x-2">
                     <Badge variant={category.is_active ? "default" : "secondary"}>
                       {category.is_active ? "Active" : "Inactive"}
                     </Badge>
