@@ -182,14 +182,14 @@ const OrderHistory = ({ user }: OrderHistoryProps) => {
           />
         </div>
         
-        <div className="flex gap-2 flex-wrap">
+        <div className="flex flex-nowrap overflow-x-auto whitespace-nowrap space-x-2 scrollbar-thin scrollbar-thumb-gray-300">
           {['all', 'pending', 'confirmed', 'preparing', 'ready', 'delivered', 'cancelled'].map((status) => (
             <Button
               key={status}
               variant={selectedStatus === status ? 'default' : 'outline'}
               size="sm"
               onClick={() => handleStatusChange(status)}
-              className="text-xs"
+              className="text-xs min-w-max"
             >
               {status === 'all' ? 'Semua' : getStatusLabel(status)}
             </Button>

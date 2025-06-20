@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import {
   Pagination,
@@ -70,39 +69,41 @@ const PaginationControls = ({
         Menampilkan {startItem} - {endItem} dari {totalItems} data
       </div>
       
-      <Pagination>
-        <PaginationContent>
-          <PaginationItem>
-            <PaginationPrevious 
-              onClick={() => canGoPrev && onPageChange(currentPage - 1)}
-              className={!canGoPrev ? "pointer-events-none opacity-50" : "cursor-pointer"}
-            />
-          </PaginationItem>
-
-          {getVisiblePages().map((page, index) => (
-            <PaginationItem key={index}>
-              {page === '...' ? (
-                <PaginationEllipsis />
-              ) : (
-                <PaginationLink
-                  onClick={() => onPageChange(Number(page))}
-                  isActive={currentPage === page}
-                  className="cursor-pointer"
-                >
-                  {page}
-                </PaginationLink>
-              )}
+      <div className="flex flex-nowrap overflow-x-auto whitespace-nowrap scrollbar-thin scrollbar-thumb-gray-300">
+        <Pagination>
+          <PaginationContent>
+            <PaginationItem>
+              <PaginationPrevious 
+                onClick={() => canGoPrev && onPageChange(currentPage - 1)}
+                className={!canGoPrev ? "pointer-events-none opacity-50" : "cursor-pointer"}
+              />
             </PaginationItem>
-          ))}
 
-          <PaginationItem>
-            <PaginationNext 
-              onClick={() => canGoNext && onPageChange(currentPage + 1)}
-              className={!canGoNext ? "pointer-events-none opacity-50" : "cursor-pointer"}
-            />
-          </PaginationItem>
-        </PaginationContent>
-      </Pagination>
+            {getVisiblePages().map((page, index) => (
+              <PaginationItem key={index}>
+                {page === '...' ? (
+                  <PaginationEllipsis />
+                ) : (
+                  <PaginationLink
+                    onClick={() => onPageChange(Number(page))}
+                    isActive={currentPage === page}
+                    className="cursor-pointer"
+                  >
+                    {page}
+                  </PaginationLink>
+                )}
+              </PaginationItem>
+            ))}
+
+            <PaginationItem>
+              <PaginationNext 
+                onClick={() => canGoNext && onPageChange(currentPage + 1)}
+                className={!canGoNext ? "pointer-events-none opacity-50" : "cursor-pointer"}
+              />
+            </PaginationItem>
+          </PaginationContent>
+        </Pagination>
+      </div>
     </div>
   );
 };

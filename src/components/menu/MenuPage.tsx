@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
@@ -108,12 +107,12 @@ const MenuPage = ({ user, onBack, selectedCategoryId, initialSearchQuery = "", o
         />
       </div>
 
-      <div className="flex flex-wrap gap-2 mb-6">
+      <div className="flex flex-nowrap overflow-x-auto whitespace-nowrap px-4 space-x-2 mb-6 scrollbar-thin scrollbar-thumb-gray-300">
         <Button
           variant={selectedCategory === null ? "default" : "outline"}
           size="sm"
           onClick={() => setSelectedCategory(null)}
-          className={selectedCategory === null ? "bg-orange-500 hover:bg-orange-600" : ""}
+          className={`${selectedCategory === null ? "bg-orange-500 hover:bg-orange-600" : ""} min-w-max`}
         >
           Semua
         </Button>
@@ -123,7 +122,7 @@ const MenuPage = ({ user, onBack, selectedCategoryId, initialSearchQuery = "", o
             variant={selectedCategory === category.id ? "default" : "outline"}
             size="sm"
             onClick={() => setSelectedCategory(category.id)}
-            className={selectedCategory === category.id ? "bg-orange-500 hover:bg-orange-600" : ""}
+            className={`${selectedCategory === category.id ? "bg-orange-500 hover:bg-orange-600" : ""} min-w-max`}
           >
             {category.name}
           </Button>

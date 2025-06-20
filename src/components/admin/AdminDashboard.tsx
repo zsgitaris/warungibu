@@ -170,65 +170,61 @@ const AdminDashboard = ({ user, onBack }: AdminDashboardProps) => {
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           {isMobile ? (
-            /* Mobile Tabs - Vertical Layout */
+            /* Mobile Tabs - Scrollable Layout */
             <div className="flex flex-col space-y-4">
-              <TabsList className="grid grid-cols-2 gap-1 glass border-0 bg-white/60 backdrop-blur-sm p-1 rounded-xl h-auto">
-                <TabsTrigger 
-                  value="overview" 
-                  className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-1 text-xs py-2"
-                >
-                  <BarChart3 className="w-3 h-3" />
-                  Overview
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="orders" 
-                  className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-1 text-xs py-2"
-                >
-                  <ShoppingCart className="w-3 h-3" />
-                  Pesanan
-                </TabsTrigger>
-              </TabsList>
-              
-              <TabsList className="grid grid-cols-2 gap-1 glass border-0 bg-white/60 backdrop-blur-sm p-1 rounded-xl h-auto">
-                <TabsTrigger 
-                  value="menu" 
-                  className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-1 text-xs py-2"
-                >
-                  <Package className="w-3 h-3" />
-                  Menu
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="categories" 
-                  className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-1 text-xs py-2"
-                >
-                  <Settings className="w-3 h-3" />
-                  Kategori
-                </TabsTrigger>
-              </TabsList>
-              
-              <TabsList className="grid grid-cols-3 gap-1 glass border-0 bg-white/60 backdrop-blur-sm p-1 rounded-xl h-auto">
-                <TabsTrigger 
-                  value="banners" 
-                  className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-1 text-xs py-2"
-                >
-                  <Image className="w-3 h-3" />
-                  Banner
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="users" 
-                  className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-1 text-xs py-2"
-                >
-                  <Users className="w-3 h-3" />
-                  Users
-                </TabsTrigger>
-                <TabsTrigger 
-                  value="analytics" 
-                  className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-1 text-xs py-2"
-                >
-                  <Sparkles className="w-3 h-3" />
-                  Analytics
-                </TabsTrigger>
-              </TabsList>
+              <div className="flex flex-nowrap overflow-x-auto whitespace-nowrap px-4 space-x-2 scrollbar-thin scrollbar-thumb-gray-300">
+                <TabsList className="flex flex-nowrap glass border-0 bg-white/60 backdrop-blur-sm p-1 rounded-xl h-auto min-w-max">
+                  <TabsTrigger 
+                    value="overview" 
+                    className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-1 text-xs py-2 px-3 whitespace-nowrap"
+                  >
+                    <BarChart3 className="w-3 h-3" />
+                    Overview
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="orders" 
+                    className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-1 text-xs py-2 px-3 whitespace-nowrap"
+                  >
+                    <ShoppingCart className="w-3 h-3" />
+                    Pesanan
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="menu" 
+                    className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-1 text-xs py-2 px-3 whitespace-nowrap"
+                  >
+                    <Package className="w-3 h-3" />
+                    Menu
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="categories" 
+                    className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-1 text-xs py-2 px-3 whitespace-nowrap"
+                  >
+                    <Settings className="w-3 h-3" />
+                    Kategori
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="banners" 
+                    className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-1 text-xs py-2 px-3 whitespace-nowrap"
+                  >
+                    <Image className="w-3 h-3" />
+                    Banner
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="users" 
+                    className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-1 text-xs py-2 px-3 whitespace-nowrap"
+                  >
+                    <Users className="w-3 h-3" />
+                    Users
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="analytics" 
+                    className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-1 text-xs py-2 px-3 whitespace-nowrap"
+                  >
+                    <Sparkles className="w-3 h-3" />
+                    Analytics
+                  </TabsTrigger>
+                </TabsList>
+              </div>
             </div>
           ) : (
             /* Desktop Tabs - Horizontal Layout */

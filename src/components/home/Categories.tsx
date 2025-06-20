@@ -32,7 +32,7 @@ const Categories = ({ categories, onCategoryClick }: CategoriesProps) => {
           </p>
         </div>
         
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div className="flex flex-nowrap overflow-x-auto whitespace-nowrap px-4 pb-4 md:grid md:grid-cols-3 lg:grid-cols-4 gap-6 scrollbar-thin scrollbar-thumb-gray-300">
           {categories.map((category) => (
             <Card 
               key={category.id}
@@ -41,7 +41,7 @@ const Categories = ({ categories, onCategoryClick }: CategoriesProps) => {
                          border-2 border-orange-200/80 hover:border-orange-400/90 
                          shadow-soft hover:shadow-strong 
                          hover:-translate-y-2 hover:scale-105
-                         rounded-2xl overflow-hidden"
+                         rounded-2xl overflow-hidden min-w-[160px] md:min-w-0"
               onClick={() => handleCategoryClick(category.id)}
             >
               <CardContent className="p-4 md:p-6 text-center">
