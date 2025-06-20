@@ -1,6 +1,5 @@
 import { supabase } from '@/integrations/supabase/client';
 import { notifyByTelegram } from './notifications';
-import { notifyByTelegram } from './notifications';
 
 interface OrderSubscriptionCallbacks {
   onNewOrder?: (order: any) => void;
