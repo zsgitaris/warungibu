@@ -141,28 +141,28 @@ const AdminDashboard = ({ user, onBack }: AdminDashboardProps) => {
 
       {/* Content */}
       <div className="relative z-10 container mx-auto px-2 sm:px-4 py-4 sm:py-8 max-w-7xl">
-        <div className="flex items-center justify-between mb-4 sm:mb-6">
-          <div className="flex items-center">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-4 sm:mb-6 gap-4">
+          <div className="flex items-center gap-2 sm:gap-4 min-w-0 flex-1">
             <Button 
               onClick={onBack} 
               variant="ghost" 
               size="sm"
-              className="glass border-0 hover:bg-white/80 text-gray-700 hover:text-gray-900 backdrop-blur-sm rounded-full px-3 sm:px-4 py-2 transition-all duration-300 shadow-soft hover:shadow-medium"
+              className="glass border-0 hover:bg-white/80 text-gray-700 hover:text-gray-900 backdrop-blur-sm rounded-full px-3 sm:px-4 py-2 transition-all duration-300 shadow-soft hover:shadow-medium flex-shrink-0"
             >
               ← Kembali
             </Button>
-            <div className="ml-2 sm:ml-4 flex items-center gap-2 sm:gap-3">
-              <div className="p-1.5 sm:p-2 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl shadow-medium">
+            <div className="flex items-center gap-2 sm:gap-3 min-w-0">
+              <div className="p-1.5 sm:p-2 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl shadow-medium flex-shrink-0">
                 <Shield className="w-4 sm:w-6 h-4 sm:h-6 text-white" />
               </div>
-              <h1 className="text-xl sm:text-3xl font-bold text-gray-900">Admin Dashboard</h1>
+              <h1 className="text-lg sm:text-2xl lg:text-3xl font-bold text-gray-900 truncate">Admin Dashboard</h1>
             </div>
           </div>
           <Button
             onClick={() => refetchStats()}
             variant="outline"
             size="sm"
-            className="glass border-0 bg-white/60 hover:bg-white/80 text-gray-700 hover:text-gray-900 shadow-soft hover:shadow-medium transition-all duration-300"
+            className="glass border-0 bg-white/60 hover:bg-white/80 text-gray-700 hover:text-gray-900 shadow-soft hover:shadow-medium transition-all duration-300 flex-shrink-0"
           >
             Refresh Data
           </Button>
@@ -170,65 +170,73 @@ const AdminDashboard = ({ user, onBack }: AdminDashboardProps) => {
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           {isMobile ? (
-            /* Mobile Tabs - Scrollable Layout */
-            <div className="flex flex-col space-y-4">
-              <div className="flex flex-nowrap overflow-x-auto whitespace-nowrap px-4 space-x-2 scrollbar-thin scrollbar-thumb-gray-300">
-                <TabsList className="flex flex-nowrap glass border-0 bg-white/60 backdrop-blur-sm p-1 rounded-xl h-auto min-w-max">
-                  <TabsTrigger 
-                    value="overview" 
-                    className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-1 text-xs py-2 px-3 whitespace-nowrap"
-                  >
-                    <BarChart3 className="w-3 h-3" />
-                    Overview
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="orders" 
-                    className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-1 text-xs py-2 px-3 whitespace-nowrap"
-                  >
-                    <ShoppingCart className="w-3 h-3" />
-                    Pesanan
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="menu" 
-                    className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-1 text-xs py-2 px-3 whitespace-nowrap"
-                  >
-                    <Package className="w-3 h-3" />
-                    Menu
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="categories" 
-                    className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-1 text-xs py-2 px-3 whitespace-nowrap"
-                  >
-                    <Settings className="w-3 h-3" />
-                    Kategori
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="banners" 
-                    className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-1 text-xs py-2 px-3 whitespace-nowrap"
-                  >
-                    <Image className="w-3 h-3" />
-                    Banner
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="users" 
-                    className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-1 text-xs py-2 px-3 whitespace-nowrap"
-                  >
-                    <Users className="w-3 h-3" />
-                    Users
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="analytics" 
-                    className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-1 text-xs py-2 px-3 whitespace-nowrap"
-                  >
-                    <Sparkles className="w-3 h-3" />
-                    Analytics
-                  </TabsTrigger>
-                </TabsList>
+            /* Mobile Tabs - Scrollable horizontal layout */
+            <div className="mb-4 sm:mb-6">
+              <div className="flex overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 pb-2">
+                <div className="flex space-x-2 px-4 min-w-max">
+                  <TabsList className="flex space-x-1 glass border-0 bg-white/60 backdrop-blur-sm p-1 rounded-xl h-auto">
+                    <TabsTrigger 
+                      value="overview" 
+                      className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-1 text-xs py-2 px-3 whitespace-nowrap"
+                    >
+                      <BarChart3 className="w-3 h-3" />
+                      Overview
+                    </TabsTrigger>
+                    <TabsTrigger 
+                      value="orders" 
+                      className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-1 text-xs py-2 px-3 whitespace-nowrap"
+                    >
+                      <ShoppingCart className="w-3 h-3" />
+                      Pesanan
+                    </TabsTrigger>
+                  </TabsList>
+                  
+                  <TabsList className="flex space-x-1 glass border-0 bg-white/60 backdrop-blur-sm p-1 rounded-xl h-auto">
+                    <TabsTrigger 
+                      value="menu" 
+                      className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-1 text-xs py-2 px-3 whitespace-nowrap"
+                    >
+                      <Package className="w-3 h-3" />
+                      Menu
+                    </TabsTrigger>
+                    <TabsTrigger 
+                      value="categories" 
+                      className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-1 text-xs py-2 px-3 whitespace-nowrap"
+                    >
+                      <Settings className="w-3 h-3" />
+                      Kategori
+                    </TabsTrigger>
+                  </TabsList>
+                  
+                  <TabsList className="flex space-x-1 glass border-0 bg-white/60 backdrop-blur-sm p-1 rounded-xl h-auto">
+                    <TabsTrigger 
+                      value="banners" 
+                      className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-1 text-xs py-2 px-3 whitespace-nowrap"
+                    >
+                      <Image className="w-3 h-3" />
+                      Banner
+                    </TabsTrigger>
+                    <TabsTrigger 
+                      value="users" 
+                      className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-1 text-xs py-2 px-3 whitespace-nowrap"
+                    >
+                      <Users className="w-3 h-3" />
+                      Users
+                    </TabsTrigger>
+                    <TabsTrigger 
+                      value="analytics" 
+                      className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-1 text-xs py-2 px-3 whitespace-nowrap"
+                    >
+                      <Sparkles className="w-3 h-3" />
+                      Analytics
+                    </TabsTrigger>
+                  </TabsList>
+                </div>
               </div>
             </div>
           ) : (
             /* Desktop Tabs - Horizontal Layout */
-            <TabsList className="grid w-full grid-cols-7 glass border-0 bg-white/60 backdrop-blur-sm p-1 rounded-xl">
+            <TabsList className="grid w-full grid-cols-7 glass border-0 bg-white/60 backdrop-blur-sm p-1 rounded-xl mb-6">
               <TabsTrigger 
                 value="overview" 
                 className="data-[state=active]:bg-white data-[state=active]:text-gray-900 data-[state=active]:shadow-medium rounded-lg transition-all duration-200 flex items-center gap-2"
@@ -341,111 +349,6 @@ const AdminDashboard = ({ user, onBack }: AdminDashboardProps) => {
                   </div>
 
                   <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
-                    <Card className="glass border-0 shadow-strong backdrop-blur-xl bg-white/80 hover:bg-white/90 transition-all duration-300">
-                      <CardHeader>
-                        <CardTitle className="flex items-center gap-2 text-gray-900">
-                          <Package className="w-5 h-5" />
-                          Menu Items
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent>
-                        <div className="text-3xl font-bold mb-2 text-gray-900">{stats?.totalMenuItems || 0}</div>
-                        <p className="text-sm text-gray-600">Total item menu tersedia</p>
-                      </CardContent>
-                    </Card>
+                    <Card className="glass border-0 shadow-strong backdrop-blur-xl bg-white/80 hover:bg-white/90 I'll create a comprehensive PR to fix all UI/UX overlapping issues and improve the overall design consistency:
 
-                    <Card className="glass border-0 shadow-strong backdrop-blur-xl bg-white/80 hover:bg-white/90 transition-all duration-300">
-                      <CardHeader>
-                        <CardTitle className="flex items-center gap-2 text-gray-900">
-                          <Settings className="w-5 h-5" />
-                          Quick Actions
-                        </CardTitle>
-                      </CardHeader>
-                      <CardContent className="space-y-2">
-                        <Button 
-                          className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 hover:from-blue-600 hover:to-indigo-600 text-white shadow-medium hover:shadow-strong transition-all duration-300" 
-                          onClick={() => setActiveTab("orders")}
-                        >
-                          Kelola Pesanan
-                        </Button>
-                        <Button 
-                          variant="outline" 
-                          className="w-full glass border-0 bg-white/60 hover:bg-white/80 text-gray-700 hover:text-gray-900 shadow-soft hover:shadow-medium transition-all duration-300" 
-                          onClick={() => setActiveTab("menu")}
-                        >
-                          Kelola Menu
-                        </Button>
-                      </CardContent>
-                    </Card>
-                  </div>
-                </div>
-              </ScrollArea>
-            </TabsContent>
-
-            <TabsContent value="orders">
-              <div className="glass border-0 shadow-strong backdrop-blur-xl bg-white/80 rounded-xl p-3 sm:p-6">
-                <ScrollArea className="h-[calc(100vh-250px)] w-full">
-                  <div className="pr-4">
-                    <AdminOrderManagement user={user} />
-                  </div>
-                </ScrollArea>
-              </div>
-            </TabsContent>
-
-            <TabsContent value="menu">
-              <div className="glass border-0 shadow-strong backdrop-blur-xl bg-white/80 rounded-xl p-3 sm:p-6">
-                <ScrollArea className="h-[calc(100vh-250px)] w-full">
-                  <div className="pr-4">
-                    <AdminMenuManagement />
-                  </div>
-                </ScrollArea>
-              </div>
-            </TabsContent>
-
-            <TabsContent value="categories">
-              <div className="glass border-0 shadow-strong backdrop-blur-xl bg-white/80 rounded-xl p-3 sm:p-6">
-                <ScrollArea className="h-[calc(100vh-250px)] w-full">
-                  <div className="pr-4">
-                    <AdminCategoryManagement />
-                  </div>
-                </ScrollArea>
-              </div>
-            </TabsContent>
-
-            <TabsContent value="banners">
-              <div className="glass border-0 shadow-strong backdrop-blur-xl bg-white/80 rounded-xl p-3 sm:p-6">
-                <ScrollArea className="h-[calc(100vh-250px)] w-full">
-                  <div className="pr-4">
-                    <AdminBannerManagement user={user} />
-                  </div>
-                </ScrollArea>
-              </div>
-            </TabsContent>
-
-            <TabsContent value="users">
-              <div className="glass border-0 shadow-strong backdrop-blur-xl bg-white/80 rounded-xl p-3 sm:p-6">
-                <ScrollArea className="h-[calc(100vh-250px)] w-full">
-                  <div className="pr-4">
-                    <AdminUserManagement user={user} />
-                  </div>
-                </ScrollArea>
-              </div>
-            </TabsContent>
-
-            <TabsContent value="analytics">
-              <div className="glass border-0 shadow-strong backdrop-blur-xl bg-white/80 rounded-xl p-3 sm:p-6">
-                <ScrollArea className="h-[calc(100vh-250px)] w-full">
-                  <div className="pr-4">
-                    <AdminAnalytics user={user} />
-                  </div>
-                </ScrollArea>
-              </div>
-            </TabsContent>
-          </div>
-        </Tabs>
-      </div>
-    </div>
-  );
-};
-
-export default AdminDashboard;
+<boltArtifact id="fix-ui-ux-overlapping" title="Fix UI/UX Overlapping Issues and Improve Design Consistency">

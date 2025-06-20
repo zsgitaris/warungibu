@@ -155,94 +155,103 @@ const Header = ({ user, profile, onSignOut, onNavigate, onNavLinkClick, onShowAu
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-orange-100/20 shadow-lg">
-      <div className="container-modern py-2 sm:py-4">
+      <div className="container mx-auto px-4 py-2 sm:py-3">
         <div className="flex items-center justify-between gap-2">
-          <div className="flex items-center space-x-2 sm:space-x-4 flex-shrink-0">
+          {/* Logo Section - Fixed width to prevent shifting */}
+          <div className="flex items-center space-x-2 sm:space-x-3 flex-shrink-0 min-w-0">
             <div 
-              className="flex items-center gap-2 sm:gap-3 cursor-pointer group hover-lift"
+              className="flex items-center gap-2 cursor-pointer group hover-lift"
               onClick={handleHomeClick}
             >
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl sm:rounded-2xl flex items-center justify-center shadow-soft group-hover:shadow-medium transition-all duration-300 hover-scale-sm">
-                <span className="text-white font-bold text-lg sm:text-xl">W</span>
+              <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg sm:rounded-xl flex items-center justify-center shadow-soft group-hover:shadow-medium transition-all duration-300 hover-scale-sm">
+                <span className="text-white font-bold text-sm sm:text-lg">W</span>
               </div>
-              <h1 className="text-base sm:text-2xl font-bold bg-gradient-to-r from-orange-700 via-red-600 to-orange-800 bg-clip-text text-transparent transition-all duration-300"
-                style={{
-                  textShadow: '3px 3px 6px rgba(0,0,0,0.4), 1px 1px 0px rgba(255,255,255,0.4)',
-                  WebkitTextStroke: '0.5px rgba(0,0,0,0.1)'
-                }}
-              >
-                Warung IbuMus
-              </h1>
+              {!isMobile && (
+                <h1 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-orange-700 via-red-600 to-orange-800 bg-clip-text text-transparent transition-all duration-300 whitespace-nowrap"
+                  style={{
+                    textShadow: '2px 2px 4px rgba(0,0,0,0.3)',
+                    WebkitTextStroke: '0.3px rgba(0,0,0,0.1)'
+                  }}
+                >
+                  Warung IbuMus
+                </h1>
+              )}
             </div>
           </div>
           
-          <nav className="hidden lg:flex items-center space-x-2">
-            <Button 
-              variant="ghost"
-              onClick={handleHomeClick}
-              className="btn-ghost px-4 py-2 rounded-xl hover:bg-orange-50 hover:text-orange-600"
-            >
-              Beranda
-            </Button>
-            <Button 
-              variant="ghost"
-              onClick={handleMenuClick}
-              className="btn-ghost px-4 py-2 rounded-xl hover:bg-orange-50 hover:text-orange-600"
-            >
-              Menu
-            </Button>
-            {user && isAdmin && (
+          {/* Desktop Navigation - Hidden on mobile */}
+          {!isMobile && (
+            <nav className="hidden lg:flex items-center space-x-1 flex-shrink-0">
               <Button 
                 variant="ghost"
-                onClick={() => onNavigate('admin')}
-                className="btn-ghost px-4 py-2 rounded-xl hover:bg-orange-50 hover:text-orange-600 flex items-center gap-2"
+                onClick={handleHomeClick}
+                className="btn-ghost px-3 py-2 rounded-lg hover:bg-orange-50 hover:text-orange-600 text-sm"
               >
-                <Settings className="w-4 h-4" />
-                Admin
+                Beranda
               </Button>
-            )}
-            {!user && (
-              <>
+              <Button 
+                variant="ghost"
+                onClick={handleMenuClick}
+                className="btn-ghost px-3 py-2 rounded-lg hover:bg-orange-50 hover:text-orange-600 text-sm"
+              >
+                Menu
+              </Button>
+              {user && isAdmin && (
                 <Button 
                   variant="ghost"
-                  onClick={handleAboutClick}
-                  className="btn-ghost px-4 py-2 rounded-xl hover:bg-orange-50 hover:text-orange-600"
+                  onClick={() => onNavigate('admin')}
+                  className="btn-ghost px-3 py-2 rounded-lg hover:bg-orange-50 hover:text-orange-600 flex items-center gap-2 text-sm"
                 >
-                  Tentang
+                  <Settings className="w-4 h-4" />
+                  Admin
                 </Button>
-                <Button 
-                  variant="ghost"
-                  onClick={handleContactClick}
-                  className="btn-ghost px-4 py-2 rounded-xl hover:bg-orange-50 hover:text-orange-600"
-                >
-                  Kontak
-                </Button>
-              </>
-            )}
-          </nav>
+              )}
+              {!user && (
+                <>
+                  <Button 
+                    variant="ghost"
+                    onClick={handleAboutClick}
+                    className="btn-ghost px-3 py-2 rounded-lg hover:bg-orange-50 hover:text-orange-600 text-sm"
+                  >
+                    Tentang
+                  </Button>
+                  <Button 
+                    variant="ghost"
+                    onClick={handleContactClick}
+                    className="btn-ghost px-3 py-2 rounded-lg hover:bg-orange-50 hover:text-orange-600 text-sm"
+                  >
+                    Kontak
+                  </Button>
+                </>
+              )}
+            </nav>
+          )}
           
-          <div className="flex items-center space-x-1 sm:space-x-3 flex-shrink-0">
+          {/* Right Section - Actions */}
+          <div className="flex items-center space-x-1 sm:space-x-2 flex-shrink-0">
+            {/* Search Button - Desktop only */}
             {user && !isMobile && (
               <Button
                 variant="ghost"
                 size="sm"
-                className="text-gray-500 hover:text-orange-600 hover:bg-orange-50 p-2 rounded-xl transition-all duration-200 hover-lift"
+                className="text-gray-500 hover:text-orange-600 hover:bg-orange-50 p-2 rounded-lg transition-all duration-200 hover-lift"
               >
-                <Search className="w-5 h-5" />
+                <Search className="w-4 h-4" />
               </Button>
             )}
 
+            {/* Notifications */}
             {user && (
               <Popover open={isNotificationOpen} onOpenChange={setIsNotificationOpen}>
                 <PopoverTrigger asChild>
                   <Button
                     variant="ghost"
                     size="sm"
-                    className="relative text-gray-500 hover:text-orange-600 hover:bg-orange-50 p-1.5 sm:p-2 rounded-xl transition-all duration-200 hover-lift"
+                    className="relative text-gray-500 hover:text-orange-600 hover:bg-orange-50 p-1.5 sm:p-2 rounded-lg transition-all duration-200 hover-lift"
                   >
-                    <Bell className="w-4 h-4 sm:w-5 sm:h-5" />
+                    <Bell className="w-4 h-4" />
                     {unreadCount > 0 && (
-                      <span className="absolute -top-0.5 -right-0.5 sm:-top-1 sm:-right-1 w-4 h-4 sm:w-5 sm:h-5 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs rounded-full flex items-center justify-center font-medium shadow-soft animate-pulse-soft">
+                      <span className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs rounded-full flex items-center justify-center font-medium shadow-soft animate-pulse-soft">
                         {unreadCount > 9 ? '9+' : unreadCount}
                       </span>
                     )}
@@ -289,15 +298,15 @@ const Header = ({ user, profile, onSignOut, onNavigate, onNavLinkClick, onShowAu
                             onClick={() => handleNotificationClick(notification)}
                           >
                             <div className="flex items-start justify-between">
-                              <div className="flex-1">
+                              <div className="flex-1 min-w-0">
                                 <div className="flex items-center gap-2">
-                                  <h4 className={`text-sm font-medium ${
+                                  <h4 className={`text-sm font-medium truncate ${
                                     notification.is_read ? 'text-gray-700' : 'text-gray-900'
                                   }`}>
                                     {notification.title}
                                   </h4>
                                   {!notification.is_read && (
-                                    <div className="w-2 h-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-full animate-pulse-soft"></div>
+                                    <div className="w-2 h-2 bg-gradient-to-r from-orange-500 to-red-500 rounded-full animate-pulse-soft flex-shrink-0"></div>
                                   )}
                                 </div>
                                 <p className={`text-xs mt-1 ${
@@ -332,7 +341,7 @@ const Header = ({ user, profile, onSignOut, onNavigate, onNavLinkClick, onShowAu
               </Popover>
             )}
 
-            {/* Only show CartButton for non-admin users */}
+            {/* Cart Button - Only for non-admin users */}
             {user && !isAdmin && (
               <CartButton 
                 user={user} 
@@ -340,38 +349,41 @@ const Header = ({ user, profile, onSignOut, onNavigate, onNavLinkClick, onShowAu
               />
             )}
             
+            {/* User Menu or Auth Button */}
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button 
                     variant="ghost" 
                     size="sm" 
-                    className="flex items-center space-x-2 sm:space-x-3 hover:bg-orange-50 transition-all duration-200 px-2 sm:px-3 py-2 rounded-xl shadow-soft hover:shadow-medium hover-lift"
+                    className="flex items-center space-x-2 hover:bg-orange-50 transition-all duration-200 px-2 py-2 rounded-lg shadow-soft hover:shadow-medium hover-lift"
                   >
-                    <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center shadow-soft">
-                      <UserIcon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center shadow-soft">
+                      <UserIcon className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
                     </div>
-                    <div className="hidden sm:flex flex-col items-start">
-                      <span className="text-sm font-medium text-gray-900">
-                        {profile?.full_name || user?.email?.split('@')[0] || 'User'}
-                      </span>
-                      {profile?.role && (
-                        <span className="text-xs text-gray-500 capitalize">
-                          {profile.role}
+                    {!isMobile && (
+                      <div className="flex flex-col items-start">
+                        <span className="text-sm font-medium text-gray-900 truncate max-w-24">
+                          {profile?.full_name || user?.email?.split('@')[0] || 'User'}
                         </span>
-                      )}
-                    </div>
+                        {profile?.role && (
+                          <span className="text-xs text-gray-500 capitalize">
+                            {profile.role}
+                          </span>
+                        )}
+                      </div>
+                    )}
                   </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-72 bg-white/90 backdrop-blur-sm border-0 shadow-strong rounded-2xl p-2 animate-scale-in">
                   <div className="px-4 py-3 border-b border-gray-100/50">
                     <div className="flex items-center gap-3">
-                      <div className="w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center shadow-soft">
-                        <UserIcon className="w-7 h-7 text-white" />
+                      <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center shadow-soft">
+                        <UserIcon className="w-6 h-6 text-white" />
                       </div>
-                      <div className="flex-1">
-                        <p className="text-sm font-medium text-gray-900">{profile?.full_name || 'User'}</p>
-                        <p className="text-xs text-gray-500">{user?.email}</p>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm font-medium text-gray-900 truncate">{profile?.full_name || 'User'}</p>
+                        <p className="text-xs text-gray-500 truncate">{user?.email}</p>
                         <div className="mt-2">
                           {profile?.role && getRoleBadge(profile.role)}
                         </div>
@@ -415,7 +427,7 @@ const Header = ({ user, profile, onSignOut, onNavigate, onNavLinkClick, onShowAu
             ) : (
               <Button 
                 onClick={onShowAuth}
-                className="btn-primary shadow-medium rounded-lg sm:rounded-xl px-3 sm:px-6 py-2 font-medium hover-lift text-sm sm:text-base"
+                className="btn-primary shadow-medium rounded-lg px-3 sm:px-4 py-2 font-medium hover-lift text-sm whitespace-nowrap"
                 size="sm"
               >
                 {isMobile ? "Masuk" : "Masuk / Daftar"}
